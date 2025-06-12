@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Globalization;
+using System.Xml.Serialization;
 
 namespace BlankCSDotNet8
 {
@@ -19,24 +20,55 @@ namespace BlankCSDotNet8
             }
                 
         }
+        static string[] addStudent()
+        {
+            string[] details = new string[3];
+            Console.WriteLine("enter the student's name:");
+            details[0] = Console.ReadLine();
+            Console.WriteLine("enter the student's ID number:");
+            details[1] = Console.ReadLine();
+            Console.WriteLine("enter the student's form");
+            details[2] = Console.ReadLine();
+            return details;
+        }
 
         static void Main(string[] args)
         {
-            int MAX_STUDENTS = 60;
-            int[] students = new int[MAX_STUDENTS];
+            int MAX_STUDENTS = 20;
+            studentDetails[] students = new studentDetails[MAX_STUDENTS];
             int studentCount = 0;
 
-            string[] subjects = {"maths", "english", "chemistry", "biology", "physics", "DT", "computer science", "music", "drama", "art", "geography", "history"};
+            string[] subjects = {"art", "biology", "chemistry", "computer science", "drama", "engslish", "geography", "history", "maths", "music", "physics", "DT"};
             int MAX_SUBJECTS = subjects.Length;
 
             string[,] grades = new string[MAX_STUDENTS, MAX_SUBJECTS];
 
             //menu
-            Console.WriteLine("select an option and enter its number");
-            Console.WriteLine("1. Add a student ");
-            Console.WriteLine("2. Enter grades for a student ");
-            Console.WriteLine("3. View all student grades");
-            Console.WriteLine("4. Quit");
+            int choice = 0;
+            do
+            {
+                Console.WriteLine("select an option and enter its number");
+                Console.WriteLine("1. Add a student ");
+                Console.WriteLine("2. Enter grades for a student ");
+                Console.WriteLine("3. View all student grades");
+                Console.WriteLine("4. Quit");
+                choice = Convert.ToInt32(Console.ReadLine());
+                if (choice == 1)
+                {
+                    if (studentCount < MAX_STUDENTS - 1)
+                    {
+                        string[] temp = addStudent();
+                        int num = Convert.ToInt32(temp[1]);
+                        studentDetails x = new studentDetails(temp[0], num, temp[2]);
+                        students[studentCount] = x;
+                    }
+
+                    Console.WriteLine(students[0].name);
+                    Console.WriteLine(students[0].IDnum);
+                    Console.WriteLine(students[0].form);
+                }
+
+            } while (choice == 0);
 
 
 
