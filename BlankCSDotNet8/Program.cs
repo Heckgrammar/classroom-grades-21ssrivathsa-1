@@ -67,6 +67,32 @@ namespace BlankCSDotNet8
                     Console.WriteLine(students[0].IDnum);
                     Console.WriteLine(students[0].form);
                 }
+                else if (choice == 2)
+                {
+                    Console.WriteLine("enter the name of the student");
+                    string studentName = Console.ReadLine();
+                    int i = -1;
+                    int num = -1;
+                    while (i < students.Length) 
+                    {
+                        i++;
+                        if (students[i].name == studentName)
+                        {
+                            num = i;
+                            i = students.Length;
+                        }
+                    }
+                    if (num == -1)
+                    {
+                        Console.WriteLine("student not found - returning to menu");
+                        choice = 0;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"enter grade for each subject for {}");
+                    }
+
+                }
 
             } while (choice == 0);
 
